@@ -1,7 +1,7 @@
 FROM ubuntu:20.04
 
 RUN apt-get update
-RUN apt-get install -y openssh-server
+RUN apt-get install -y openssh-server apt-utils
 #RUN systemctl enable ssh --now
 COPY init-server.sh init-server.sh
 RUN mkdir /var/run/sshd && chmod 0755 /var/run/sshd
