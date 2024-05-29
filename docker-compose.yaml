@@ -2,39 +2,45 @@ version: '3'
 services:
   server-1:
     container_name: server-1
-    image: linuxkit/sshd:v1.0.0
+    image: jsebastianar/sshd:v0.0.1
     networks:
       ansible:
         ipv4_address: 172.20.0.2
     volumes:
       - type: bind
-        source: ./ssh-conf
-        target: /etc/ssh
-    command: sh /etc/ssh/init-server.sh
+        source: ./ssh-conf/sshd_config
+        target: /etc/ssh/sshd_config
+    environment:
+      - SSH_LOGIN_PUB_KEY=ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIA1jto5G95AkhkHH/T3cSa1Uiguq7vNq6t3AMCb6zW/U ssh login
+    #command: /usr/sbin/sshd -D -d
   server-2:
     container_name: server-2
-    image: linuxkit/sshd:v1.0.0
+    image: jsebastianar/sshd:v0.0.1
     networks:
       ansible:
         ipv4_address: 172.20.0.3
     volumes:
       - type: bind
-        source: ./ssh-conf
-        target: /etc/ssh
-    command: sh /etc/ssh/init-server.sh
+        source: ./ssh-conf/sshd_config
+        target: /etc/ssh/sshd_config
+    environment:
+      - SSH_LOGIN_PUB_KEY=ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIA1jto5G95AkhkHH/T3cSa1Uiguq7vNq6t3AMCb6zW/U ssh login
+    #command: /usr/sbin/sshd -D -d
 
     
   server-3:
     container_name: server-3
-    image: linuxkit/sshd:v1.0.0
+    image: jsebastianar/sshd:v0.0.1
     networks:
       ansible:
         ipv4_address: 172.20.0.4
     volumes:
       - type: bind
-        source: ./ssh-conf
-        target: /etc/ssh
-    command: sh /etc/ssh/init-server.sh
+        source: ./ssh-conf/sshd_config
+        target: /etc/ssh/sshd_config
+    environment:
+      - SSH_LOGIN_PUB_KEY=ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIA1jto5G95AkhkHH/T3cSa1Uiguq7vNq6t3AMCb6zW/U ssh login
+    #command: /usr/sbin/sshd -D -d
 
 networks:
   ansible:
